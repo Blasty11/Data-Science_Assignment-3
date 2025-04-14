@@ -1,0 +1,49 @@
+1. TF‑IDF vs. One‑Hot Encoding: Which Works Better?
+Why TF‑IDF often wins
+
+Weights rare terms more: Gives extra emphasis to uncommon but telling symptoms or risk factors.
+
+Downplays common words: Stops very frequent terms from drowning out the signal.
+
+Ideal for free‑text: Shines when your features come from narrative fields (e.g. symptom descriptions).
+
+When One‑Hot can shine
+
+Binary clarity: Perfect if you only care about “present vs. absent” and every feature is equally important.
+
+Low‑dimensional, clean data: In small, well‑labeled datasets, simple presence/absence sometimes beats term‑frequency tricks.
+
+In our tests: TF‑IDF (especially with StandardScaler) gave consistently higher F1‑scores, showing it captures the nuances of medical text better than raw one‑hot bits.
+
+2. Clinical Alignment: Do TF‑IDF Clusters Make Sense?
+Better separation: Diseases grouped by TF‑IDF features tended to match their real‑world categories.
+
+Rare symptoms matter: Clinically, an unusual sign can be more diagnostic—TF‑IDF automatically boosts those.
+
+Interoperability: If two patients share high‑weight terms, they end up in the same cluster, mimicking how doctors think.
+
+3. Drawbacks of Each Method
+TF‑IDF limitations
+
+Vocabulary quirks: Misspells or synonyms (e.g. “fever” vs. “elevated temperature”) count as entirely different features.
+
+High dimensionality: Can blow up into huge, sparse vectors unless you reduce dimensions.
+
+No true semantics: Doesn’t “understand” meaning—just counts and weights.
+
+One‑Hot limitations
+
+All features equal: A rare sign is treated the same as a common one.
+
+Dimensional explosion: If you have hundreds of possible terms, you get hundreds of columns—easy to overfit.
+
+Weak on text: Lacks the nuance to pick up on term importance or context.
+
+4. Next Steps & Variants
+We also tried a handful of alternate encodings and dimensionality‑reduction tricks in Task 3—none beat the TF‑IDF approach in our setup. If you explore further, focus on:
+
+Adjusting TF‑IDF parameters (e.g. n‑grams, min_df)
+
+Combining TF‑IDF with other feature sets
+
+Advanced feature selectors (e.g. mutual information, L1‑based selection)
